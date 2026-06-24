@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.skyhands.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+
+  "client": [
+    "HeldItemRendererMixin",
+    "LivingEntityMixin",
+    "PlayerMixin",
+    "YACLScreenMixin"
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
