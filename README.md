@@ -23,7 +23,7 @@
 
 ## 💡 How to use
 
-Access the configuration menu in-game by using [ModMenu](https://modrinth.com/mod/modmenu), or by typing the dedicated command. You can tweak everything in real-time without needing to restart!
+Access the configuration menu in-game by using [ModMenu](https://modrinth.com/mod/modmenu), or by typing the dedicated command `/skyhands`. You can tweak everything in real-time without needing to restart!
 
 ## 📜 License
 
