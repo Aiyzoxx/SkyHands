@@ -144,16 +144,16 @@ public abstract class HeldItemRendererMixin {
         // But since we cancel, we must render the item!
         // We will just call the actual renderItem via casting.
         ItemDisplayContext ctx = arm == HumanoidArm.RIGHT ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
-        ((ItemInHandRenderer)(Object)this).renderItem((LivingEntity)player, heldItem, ctx, poseStack, (net.minecraft.client.renderer.SubmitNodeCollector)collector, packedLight);
+        ((ItemInHandRenderer)(Object)this).renderItem((LivingEntity)player, heldItem, ctx, arm == HumanoidArm.LEFT, poseStack, (net.minecraft.client.renderer.MultiBufferSource)collector, packedLight);
         
         poseStack.popPose();
     }
 
-    @org.spongepowered.asm.mixin.injection.Redirect(method="tick()V", at=@At(value="INVOKE", target="Lnet/minecraft/client/player/LocalPlayer;getItemSwapScale(F)F"))
+    @org.spongepowered.asm.mixin.injection.Redirect(method="tick()V", at=@At(value="INVOKE", target="Lnet/minecraft/client/player/LocalPlayer;getAttackStrengthScale(F)F"))
     private float skyhands$suppressSwingBobbing(net.minecraft.client.player.LocalPlayer player, float partialTick) {
         if (SkyHandsConfig.Animations.suppressBobbing) {
             return 1.0f;
         }
-        return player.getItemSwapScale(partialTick);
+        return player.getAttackStrengthScale(partialTick);
     }
 }
