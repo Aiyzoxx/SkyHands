@@ -14,15 +14,7 @@ public class YACLScreenMixin {
     private int skyhands$modifyFillColor(int color) {
         Screen screen = Minecraft.getInstance().screen;
         if (screen != null && (screen.getClass().getName().contains("Config") || screen.getClass().getName().contains("YACL"))) {
-            int alpha = (color >> 24) & 0xFF;
-            if (alpha > 100) {
-                int r = (color >> 16) & 0xFF;
-                int g = (color >> 8) & 0xFF;
-                int b = color & 0xFF;
-                if (r < 60 && g < 60 && b < 60) {
-                    return color & 0x00FFFFFF;
-                }
-            }
+            // Logic removed
         }
         return color;
     }
