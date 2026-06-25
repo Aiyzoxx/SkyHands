@@ -23,7 +23,7 @@ Please make sure to download and place the following libraries in your `.minecra
 - [ModMenu](https://modrinth.com/mod/modmenu) (Recommended, to easily access the config screen)
 
 ### Steps
-1. Install [Fabric Loader](https://fabricmc.net/use/installer/) for Minecraft `1.21.4`.
+1. Install [Fabric Loader](https://fabricmc.net/use/installer/).
 2. Download the latest version of the mod from GitHub or [Modrinth](https://modrinth.com/).
 3. Place the mod's `.jar` and the required libraries in your `.minecraft/mods` folder.
 4. Launch the game!
