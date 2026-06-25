@@ -115,7 +115,6 @@ public abstract class HeldItemRendererMixin {
         float lateSwingCurve = Mth.sin(attackProgress * attackProgress * (float)Math.PI);
         float midSwingCurve = Mth.sin(Mth.sqrt(attackProgress) * (float)Math.PI);
         
-        // Use a static base rotation similar to default to prevent breaking completely, then apply arc.
         float preY = SkyHandsConfig.Offhand.swingCounterRotation ? 45.0f : 0.0f;
         poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees((float)armSideSign * (preY + lateSwingCurve * SkyHandsConfig.Animations.swingArcY)));
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees((float)armSideSign * midSwingCurve * SkyHandsConfig.Animations.swingArcZ));
@@ -128,7 +127,7 @@ public abstract class HeldItemRendererMixin {
     @Inject(method={"renderArmWithItem"}, at={@At(value="HEAD")}, cancellable=true)
     private void skyhands$applySwordBlockPose(AbstractClientPlayer player, float tickDelta, float pitch, InteractionHand hand, float swingProgress, ItemStack heldItem, float equipProgress, PoseStack poseStack, @Coerce Object collector, int packedLight, CallbackInfo ci) {
         if (!SkyHandsConfig.Animations.blockHitting || hand != InteractionHand.MAIN_HAND || !heldItem.is(net.minecraft.tags.ItemTags.SWORDS)) return;
-        if (!Minecraft.getInstance().options.keyUse.isDown()) return; // check if right click is held
+        if (!Minecraft.getInstance().options.keyUse.isDown()) return;
         
         ci.cancel();
         poseStack.pushPose();
@@ -140,9 +139,6 @@ public abstract class HeldItemRendererMixin {
         poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees((float)side * 13.365f));
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees((float)side * 78.05f));
         
-        // Call the shadow or manually dispatch. We cannot call shadow of renderItem easily because of its complex signature.
-        // But since we cancel, we must render the item!
-        // We will just call the actual renderItem via casting.
         ItemDisplayContext ctx = arm == HumanoidArm.RIGHT ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
         ((ItemInHandRenderer)(Object)this).renderItem((LivingEntity)player, heldItem, ctx, arm == HumanoidArm.LEFT, poseStack, (net.minecraft.client.renderer.MultiBufferSource)collector, packedLight);
         
