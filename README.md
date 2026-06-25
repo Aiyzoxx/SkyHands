@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="src/main/resources/assets/skyhands/icon.png" alt="SkyHands Logo" width="128">
   <h1>✨ SkyHands ✨</h1>
   <p><strong>A Hypixel Skyblock mod to fully customize your first-person hands and combat animations, inspired by DulkirMod.</strong></p>
 </div>
