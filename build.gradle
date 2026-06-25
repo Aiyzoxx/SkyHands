@@ -91,6 +91,6 @@ publishing {
 }
 
 dependencies {
-    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.20.4:2.1.2"
+    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-1.20.4:2.4.8"
 	modImplementation "dev.isxander.yacl:yet-another-config-lib-fabric:3.3.2+1.20.4"
 }
