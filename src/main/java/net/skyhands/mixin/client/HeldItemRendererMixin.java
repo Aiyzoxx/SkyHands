@@ -145,8 +145,8 @@ public abstract class HeldItemRendererMixin {
         poseStack.popPose();
     }
 
-    @org.spongepowered.asm.mixin.injection.Redirect(method="tick()V", at=@At(value="INVOKE", target="Lnet/minecraft/client/player/LocalPlayer;getAttackStrengthScale(F)F"))
-    private float skyhands$suppressSwingBobbing(net.minecraft.client.player.LocalPlayer player, float partialTick) {
+    @org.spongepowered.asm.mixin.injection.Redirect(method="tick()V", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/player/Player;getAttackStrengthScale(F)F"))
+    private float skyhands$suppressSwingBobbing(net.minecraft.world.entity.player.Player player, float partialTick) {
         if (SkyHandsConfig.Animations.suppressBobbing) {
             return 1.0f;
         }
