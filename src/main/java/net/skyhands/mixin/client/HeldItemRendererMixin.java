@@ -26,13 +26,6 @@ public abstract class HeldItemRendererMixin {
     @Shadow protected abstract void applyItemArmTransform(PoseStack poseStack, HumanoidArm arm, float equipProgress);
     @Shadow protected abstract void applyItemArmAttackTransform(PoseStack poseStack, HumanoidArm arm, float swingProgress);
 
-    @Shadow private float mainHandHeight;
-    @Shadow private float offHandHeight;
-    @Shadow private float oMainHandHeight;
-    @Shadow private float oOffHandHeight;
-    @Shadow private ItemStack mainHandItem;
-    @Shadow private ItemStack offHandItem;
-
     @Unique
     private static void SkyHands$apply(PoseStack poseStack, boolean enabled, boolean isOffhand) {
         if (!enabled) {
@@ -152,17 +145,11 @@ public abstract class HeldItemRendererMixin {
         poseStack.popPose();
     }
 
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    private void skyhands$suppressBobbing(CallbackInfo ci) {
-        if (!SkyHandsConfig.Animations.suppressBobbing) return;
-        oMainHandHeight = 1f;
-        oOffHandHeight = 1f;
-        mainHandHeight = 1f;
-        offHandHeight = 1f;
-
-        mainHandItem = net.minecraft.client.Minecraft.getInstance().player.getMainHandItem();
-        offHandItem = net.minecraft.client.Minecraft.getInstance().player.getOffhandItem();
-
-        ci.cancel();
+    @org.spongepowered.asm.mixin.injection.Redirect(method="tick()V", at=@At(value="INVOKE", target="Lnet/minecraft/client/player/LocalPlayer;getItemSwapScale(F)F"))
+    private float skyhands$suppressSwingBobbing(net.minecraft.client.player.LocalPlayer player, float partialTick) {
+        if (SkyHandsConfig.Animations.suppressBobbing) {
+            return 1.0f;
+        }
+        return player.getItemSwapScale(partialTick);
     }
 }
