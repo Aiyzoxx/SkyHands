@@ -140,7 +140,7 @@ public abstract class HeldItemRendererMixin {
         poseStack.mulPose(com.mojang.math.Axis.ZP.rotationDegrees((float)side * 78.05f));
         
         ItemDisplayContext ctx = arm == HumanoidArm.RIGHT ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
-        ((ItemInHandRenderer)(Object)this).renderItem((LivingEntity)player, heldItem, ctx, arm == HumanoidArm.LEFT, poseStack, (net.minecraft.client.renderer.MultiBufferSource)collector, packedLight);
+        ((ItemInHandRenderer)(Object)this).renderItem((LivingEntity)player, heldItem, ctx, poseStack, (net.minecraft.client.renderer.SubmitNodeCollector)collector, packedLight);
         
         poseStack.popPose();
     }
