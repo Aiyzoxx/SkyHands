@@ -5,7 +5,7 @@
 
 ## 📖 About
 
-**SkyHands** allows you to take complete control of your first-person view in Minecraft. Whether you want smaller hands, custom combat animations, or a cleaner screen for PvP and Hypixel Skyblock, SkyHands has got you covered!
+**SkyHands** allows you to take complete control of your first-person view in Minecraft. Whether you want smaller hands, custom combat animations for Hypixel Skyblock, SkyHands has got you covered!
 
 ## ⚙️ Features
 
