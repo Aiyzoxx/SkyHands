@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.17-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom' version '1.17-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -28,12 +28,12 @@ loom {
 dependencies {
 
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	
-	modImplementation "com.terraformersmc:modmenu:18.0.0-beta.1"
+	implementation "com.terraformersmc:modmenu:18.0.0-beta.1"
 }
 
 processResources {
@@ -83,6 +83,6 @@ publishing {
 }
 
 dependencies {
-    modImplementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-26.1.2:4.0.1"
-	modImplementation "maven.modrinth:yacl:3.9.4+26.1-fabric"
+    implementation "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-26.1.2:4.0.1"
+	implementation "maven.modrinth:yacl:3.9.4+26.1-fabric"
 }
