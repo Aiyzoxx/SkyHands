@@ -15,6 +15,19 @@
 - 🎨 **Custom Presets:** Save and load your favorite configurations instantly.
 - 🔧 **In-Game Config:** Easy-to-use ModMenu integration for on-the-fly tweaking.
 
+## 🖼️ Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="screenshots/Position.png" width="280"/><br/><sub><b>Position</b></sub></td>
+    <td align="center"><img src="screenshots/Animation.png" width="280"/><br/><sub><b>Animations</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="screenshots/Offhand.png" width="280"/><br/><sub><b>Offhand</b></sub></td>
+    <td align="center"><img src="screenshots/Presets.png" width="280"/><br/><sub><b>Presets</b></sub></td>
+  </tr>
+</table>
+
 ## 📥 Installation
 
 ### Dependencies
