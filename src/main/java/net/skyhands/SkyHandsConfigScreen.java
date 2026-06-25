@@ -149,50 +149,52 @@ public class SkyHandsConfigScreen {
                         .controller(TickBoxControllerBuilder::create).instant(true).build())
                     .build())
                 .build())
-            .category(ConfigCategory.createBuilder()
-                .name(Component.literal("Presets"))
-                .group(OptionGroup.createBuilder().name(Component.literal("Create New Preset"))
-                    .option(Option.<String>createBuilder().name(Component.literal("Preset Name"))
-                        .description(OptionDescription.of(Component.literal("Type a name for your new preset here.")))
-                        .binding("", () -> presetInput[0], s -> presetInput[0] = s)
-                        .controller(StringControllerBuilder::create).instant(true).build())
-                    .option(ButtonOption.createBuilder().name(Component.literal("Save Current As Preset"))
-                        .text(Component.literal("Create"))
-                        .description(OptionDescription.of(Component.literal("Saves your current configuration to a preset with the name above.")))
-                        .action((screen, opt) -> {
-                            if (!presetInput[0].isEmpty()) {
-                                SkyHandsPresets.savePreset(presetInput[0]);
-                                presetInput[0] = "";
-                                Minecraft.getInstance().setScreen(SkyHandsConfigScreen.create(parent));
-                            }
-                        }).build())
-                    .build())
-                .group(((java.util.function.Supplier<OptionGroup>) () -> {
-                    OptionGroup.Builder presetsGroup = OptionGroup.createBuilder().name(Component.literal("Saved Presets"));
-                    List<String> presets = SkyHandsPresets.getPresetNames();
-                    if (presets.isEmpty()) {
-                        presetsGroup.option(ButtonOption.createBuilder().name(Component.literal("No presets saved yet.")).action((s, o) -> {}).build());
-                    } else {
-                        for (String p : presets) {
-                            presetsGroup.option(ButtonOption.createBuilder().name(Component.literal("? Load: " + p))
+            .category(((java.util.function.Supplier<ConfigCategory>) () -> {
+                ConfigCategory.Builder presetsCategory = ConfigCategory.createBuilder()
+                    .name(Component.literal("Presets"))
+                    .group(OptionGroup.createBuilder().name(Component.literal("Create New Preset"))
+                        .option(Option.<String>createBuilder().name(Component.literal("Preset Name"))
+                            .description(OptionDescription.of(Component.literal("Type a name for your new preset here.")))
+                            .binding("", () -> presetInput[0], s -> presetInput[0] = s)
+                            .controller(StringControllerBuilder::create).instant(true).build())
+                        .option(ButtonOption.createBuilder().name(Component.literal("Save Current As Preset"))
+                            .text(Component.literal("Create"))
+                            .description(OptionDescription.of(Component.literal("Saves your current configuration to a preset with the name above.")))
+                            .action((screen, opt) -> {
+                                if (!presetInput[0].isEmpty()) {
+                                    SkyHandsPresets.savePreset(presetInput[0]);
+                                    presetInput[0] = "";
+                                    Minecraft.getInstance().setScreen(SkyHandsConfigScreen.create(parent));
+                                }
+                            }).build())
+                        .build());
+                List<String> presets = SkyHandsPresets.getPresetNames();
+                if (presets.isEmpty()) {
+                    presetsCategory.group(OptionGroup.createBuilder().name(Component.literal("Saved Presets"))
+                        .option(ButtonOption.createBuilder().name(Component.literal("No presets saved yet.")).action((s, o) -> {}).build())
+                        .build());
+                } else {
+                    for (String p : presets) {
+                        presetsCategory.group(OptionGroup.createBuilder().name(Component.literal(p))
+                            .option(ButtonOption.createBuilder().name(Component.literal("Load: " + p))
                                 .text(Component.literal("Load"))
                                 .description(OptionDescription.of(Component.literal("Load this preset.")))
                                 .action((screen, opt) -> {
                                     SkyHandsPresets.loadPreset(p);
                                     Minecraft.getInstance().setScreen(SkyHandsConfigScreen.create(parent));
-                                }).build());
-                            presetsGroup.option(ButtonOption.createBuilder().name(Component.literal("? Delete: " + p))
+                                }).build())
+                            .option(ButtonOption.createBuilder().name(Component.literal("Delete: " + p))
                                 .text(Component.literal("Delete"))
                                 .description(OptionDescription.of(Component.literal("Delete this preset permanently.")))
                                 .action((screen, opt) -> {
                                     SkyHandsPresets.deletePreset(p);
                                     Minecraft.getInstance().setScreen(SkyHandsConfigScreen.create(parent));
-                                }).build());
-                        }
+                                }).build())
+                            .build());
                     }
-                    return presetsGroup.build();
-                }).get())
-                .build())
+                }
+                return presetsCategory.build();
+            }).get())
             .build().generateScreen(parent);
     }
 }
